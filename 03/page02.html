@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function User(firstName, lastName){
+            
+            this.names = firstName + ' ' + lastName;
+            
+            //public method
+            this.show = function(){
+                console.log('User:' + this.names);
+            }
+        }
+
+       var u1 = new User('Anna', 'Smith');
+       var u2 = new User('John', 'Doe');
+
+       u1.show();
+       u2.show();
+
+       u1.age = 25;
+       console.log('u1 age:' + u1.age);
+       console.log('u2 age:' + u2.age);
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

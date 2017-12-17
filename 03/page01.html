@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        function User(){
+            console.log('Function User');
+            //private variable
+            var firstName = 'John';
+            var lastName = 'Smith';
+            this.names = firstName + ' ' + lastName;
+            //private function
+            function createAccount(){
+                console.log('Create Account:' + firstName + ' ' + lastName);
+                //console.log('Create Account:' + this.names);
+            }
+            createAccount(); //Ok!
+            //public method
+            this.createUser = function(){
+                //console.log('Create New User:' + firstName + ' ' + lastName);
+                console.log('Create New User:' + this.names);
+            }
+        }
+
+        //User(); като обикновена функция
+        var user = new User(); //създава обект
+        //console.log('User:' + user.firstName); //undefined - private variable
+        console.log('User:' + user.names);
+        //user.createAccount(); //private method - TypeError
+        user.createUser(); //public method
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

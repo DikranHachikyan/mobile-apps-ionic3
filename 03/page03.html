@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        var User = {
+            firstName:'John',
+            lastName: 'Smith',
+            show: function (){
+                console.log(`User:${this.firstName} ${this.lastName}`);
+            }
+        };
+
+        User.show();
+        console.log('First Name:' + User.firstName);
+        //var u = new User(); //TypeError: User is not a constructor
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

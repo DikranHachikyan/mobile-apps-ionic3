@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+        //Immediately Invoked Function Expression
+        var User = (function(){
+            console.log('Immediately Invoked Function Expression');
+            //private data
+            var firstName;
+            var lastName;
+            //private methods
+            function register(fname,lname){
+                firstName = fname;
+                lastName = lname;
+            }
+
+            function show(){
+                console.log(`User: ${firstName} ${lastName}`);
+            }
+            //public methods    
+            return {
+                'print': show,
+                'createUser': register,
+                'age':30,
+                'isRegistered': function(){
+                    return firstName !== undefined && lastName !== undefined;
+                }
+            };
+        })();
+
+        //2. 
+        if( !User.isRegistered()){
+            User.createUser('John', 'Doe');
+            User.print();
+        }
+    </script>
+</head>
+<body>
+    
+</body>
+</html>
