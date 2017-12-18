@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script>
+
+    const streamA = Rx.Observable
+                        .interval(100);
+    streamA
+        .take(6)
+        .map( (v) => v*2 )
+        .repeat(2)
+        .subscribe( (value)=>console.log(value));
+
+    
+  </script>
+</body>
+</html>

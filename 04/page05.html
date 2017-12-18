@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div>
+       <div>
+           <label>Height (cm) <span id="height-value">170</span></label>
+           <div>
+             <input type="range" min="120" max="200" value="170" id="height-input">
+           </div>
+       </div>
+       <div>
+           <label>Weight (kg) <span id="weight-value">70</span></label>
+           <div>
+             <input type="range" min="50" max="150" value="70" id="weight-input">
+           </div>
+       </div>
+       <div>
+           BMI <span id="bmi"></span>
+       </div>
+    </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/bacon.js/1.0.0/Bacon.min.js"></script>
+  <script>
+    const height = Bacon
+                     .fromEvent(document.querySelector('#height-input') , 'input')
+                     .map((evt)=>parseInt(evt.target.value))
+                     .startWith(170);
+                     //.onValue((value)=>{
+                     //   console.log(value, ' typeof value:' + (typeof value));
+                     //});  
+    const weight = Bacon
+                     .fromEvent(document.querySelector('#weight-input') , 'input')
+                     .map((evt)=>parseInt(evt.target.value))
+                     .startWith(70);
+                     //.onValue((value)=>{
+                     //   console.log(value, ' typeof value:' + (typeof value));
+                     // });
+    const bmi = Bacon
+                    .combineWith(height,weight, (h,w)=>{
+                        return ( w/((h/100) ** 2 ) ).toFixed(2);    
+                    })
+                    .onValue((value)=>{
+                        //console.log(value);
+                        document.querySelector('#bmi').innerHTML = value;
+                    });
+
+    height.onValue((value) => document.querySelector('#height-value').innerHTML = value);
+    weight.onValue((value) => document.querySelector('#weight-value').innerHTML = value);
+  </script>
+</body>
+</html>

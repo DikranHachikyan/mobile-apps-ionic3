@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+  <div id="container">
+    <h1>Лога на фирми</h1>
+    <div class="form-group">
+      <label for="search-box">
+        Фирма
+      </label>
+      <input type="text" id="search-box" class="form-control">
+    </div>
+  </div>
+
+  <div class="container">
+    <ul class="list-group" id="list"></ul>
+  </div>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+  <script>
+      const keyup = Rx.Observable
+                          .fromEvent($('#search-box'), 'keyup')
+                          .map( (event)=>{
+                            let companyName = $('#search-box').val();
+                            console.log('Search for:' + companyName);
+                            return companyName;
+                          });
+
+     keyup
+        .filter((companyName)=>companyName.trim().length >= 3)
+        .flatMap( (companyName)=>{
+          return Rx.Observable
+                      .fromPromise(
+                    $.get('https://autocomplete.clearbit.com/v1/companies/suggest?query=' + companyName)
+                      );
+        })
+        .subscribe( (response)=>{
+          //console.log(response);
+          renderOutput(response);
+        })
+       
+
+       function renderOutput( companies ){
+            let li = $(`<li class="list-group-item">
+                            <h2></h2>
+                            <img src="" class="img-responsive img-thumbnail">
+                            <a href=""></a>
+                          </li>
+                      `);
+            $('#list').empty();
+            for( let company of companies){
+              let item = li.clone();
+              item.find('h2').text(company.name);
+              item.find('img').attr('src',company.logo);
+              item.find('a').attr('href', 'http://' + company.domain)
+                            .text(company.name);
+              item.appendTo($('#list'));
+            }
+
+       }
+  </script>
+</body>
+</html>

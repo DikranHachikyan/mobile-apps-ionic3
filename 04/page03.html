@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+    <div>
+        <button id="plus">+</button>
+        <button id="minus">-</button>
+    </div>
+    <div>
+        Count: <span id="count">-</span>
+    </div>
+    <script
+  src="https://code.jquery.com/jquery-3.2.1.min.js"
+  integrity="sha256-hwg4gsxgFZhOsEEamdOYGBf13FyQuiTwlAQgxVSNgt4="
+  crossorigin="anonymous"></script>
+    <script>
+        var count =0;
+        $('#plus').click(function(e){
+            ++count;
+            $('#count').text(count);
+        });
+        
+        $('#minus').click(function(e){
+            --count;
+            $('#count').text(count);
+        });
+
+    </script>
+</body>
+</html>

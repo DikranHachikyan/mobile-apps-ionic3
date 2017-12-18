@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script>
+    const stream = Rx.Observable.of(1,2,3,4,5,6,7);
+
+    stream
+        .filter((v)=> (v % 2) === 0)
+        .map( (v)=> v * 10 )
+        .subscribe( (v)=> console.log(v) );
+  </script>
+</body>
+</html>

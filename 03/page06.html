@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+       String.prototype.leftPad = function(pos,char){
+            var result = this;
+            char = char || ' ';
+            if( this.length <= pos){
+                result = new Array( pos - this.length + 1).join(char) + this;
+            }
+            return result;
+       };
+
+       console.log('anna'.leftPad(10,'x'));
+       console.log('JavaScript'.leftPad(10,'x'));
+       console.log('php'.leftPad(10,'x'));
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

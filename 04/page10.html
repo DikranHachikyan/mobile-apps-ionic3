@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script>
+
+    const streamA = Rx.Observable.interval(500).take(6);
+    const streamB = Rx.Observable.of(11,22,33,44,55);
+
+    const output = streamB.concat(streamA);
+
+    output
+        .subscribe( (value)=>console.log(value));
+
+    
+  </script>
+</body>
+</html>

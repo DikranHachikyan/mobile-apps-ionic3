@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+   <div id="draggable"></div> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script>
+       const streamA = Rx.Observable
+                            .interval(1000)
+                            .skip(10)
+                            .map( (value) => value * 100);
+
+       const streamB = Rx.Observable
+                            .interval(1000)
+                            .takeUntil(streamA);
+
+      var ret = streamB
+            .subscribe( (value)=>console.log('Stream B:' + value));
+
+      console.log('Type:', typeof ret , ' ' , ret);          
+      streamA
+            
+            .subscribe( (value)=>console.log('Stream A:' + value));
+
+       
+
+
+  </script>
+</body>
+</html>

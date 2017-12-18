@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <script>
+       function User(fname,lname){
+        this.firstName = fname;
+        this.lastName = lname;
+       }
+
+       User.prototype.show = function(){
+            console.log(`User:${this.firstName} ${this.lastName}`);
+        };
+
+       User.prototype.isRegistered = function(){
+        return this.firstName !== undefined && this.lastName !== undefined;
+       }
+       
+       var user1 = new User('John','Doe');
+       var user2 = new User('Anna');
+
+       if( user1.isRegistered()){
+        console.log('Registered:',user1); 
+       }
+       
+       if( !user2.isRegistered()){
+        console.log('Not Registered:' + user2.firstName); 
+       }
+       
+    </script>
+</head>
+<body>
+    
+</body>
+</html>

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script>
+
+    const streamA = Rx.Observable
+                        .interval(100)
+                        .take(10);
+
+    streamA
+        .filter( (value) => value % 2 === 0)
+        .do( (value)=>console.log('Before map:'+value))
+        .map((value)=> value*value)
+        .do( (value)=>console.log('After map:'+value))
+        .reduce((acc,value)=> acc + value)
+        .subscribe((value)=>console.log(value));    
+
+    
+  </script>
+</body>
+</html>

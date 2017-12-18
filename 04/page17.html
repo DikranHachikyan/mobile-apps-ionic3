@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <style>
+        #draggable {
+            background-color: blue;
+            color:white;
+            text-align: center;
+            height: 80px;
+            width:80px;
+            position: absolute;
+            cursor: move;
+        }
+    </style>
+</head>
+<body>
+   <div id="draggable"></div> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script>
+        const draggable = document.querySelector('#draggable');
+
+        const mousedown = Rx.Observable
+                                .fromEvent( draggable, 'mousedown');
+        const mousemove = Rx.Observable
+                                .fromEvent( document, 'mousemove');
+        const mouseup   = Rx.Observable
+                                .fromEvent( draggable, 'mouseup');
+
+        const mousedrag = mousedown
+                            .flatMap((event)=>{
+             const startX = event.offsetX;                   
+             const startY = event.offsetY;
+             console.log('Start x=' + startX + ' y=' + startY);
+             return mousemove
+                        .map( (event)=>{
+                            console.log('Move x=' + startX + ' y=' + startY);
+                            return {
+                                left: event.clientX - startX,
+                                top:  event.clientY - startY
+                            };
+                        })
+                        .takeUntil(mouseup);                   
+        });
+
+        mousedrag
+            .subscribe( (position) => {
+                draggable.style.top = position.top + 'px';
+                draggable.style.left = position.left + 'px';
+            });
+  </script>
+</body>
+</html>

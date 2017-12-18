@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Stopwatch</title>
+    <style>
+      
+    </style>
+</head>
+<body>
+    
+    <script src="https://unpkg.com/rxjs/bundles/Rx.min.js"></script>
+    <script>
+        //1. Generator (ES6)
+        function *even(){ // * !!!
+            let i=2;
+            while( i < 100){
+                yield i;  // yield вместо return
+                i += 2;
+            }
+        }
+        //2. 
+        let gen = even();
+
+        //operator 
+        const from$ = Rx.Observable.from(gen);
+
+        from$.subscribe(
+            value => console.log('next value:' + value),
+            err=>console.log(err),
+            ()=>console.log('done')
+            );
+    </script>
+</body>
+</html> 

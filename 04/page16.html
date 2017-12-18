@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script>
+
+    const mainStream = Rx.Observable
+                            .interval(100)
+                            .take(10)
+                            .filter((value)=>value !== 5)
+                            .map( (value)=>{
+                                if( value === 5){
+                                    throw Error('Invalid value:' + value);
+                                }
+                                return value * 10;
+                            });
+
+
+
+    const firstStream = mainStream
+                            .subscribe(
+                                (value)=>console.log('First stream:' + value),
+                                (err)=>console.log(err),
+                                ()=>console.log('Done!'));
+    
+
+    
+  </script>
+</body>
+</html>

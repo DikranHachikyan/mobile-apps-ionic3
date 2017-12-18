@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+   <div id="draggable"></div> 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script>
+       function *even(){
+         let i = 0;
+         while(true){
+            yield i*2;
+            i++;
+         }
+       }
+
+       let evenGenerator = even();
+
+       const interval1s = Rx.Observable.interval(2000);
+
+       const evenObservable = Rx.Observable
+                                        .from(evenGenerator)
+                                        .take(10);
+
+
+       interval1s
+        .flatMap( value =>{
+            return  evenObservable;
+        })
+        .subscribe( (value)=>console.log('next:' + value));
+  </script>
+</body>
+</html>

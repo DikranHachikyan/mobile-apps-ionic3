@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    
+</head>
+<body>
+    
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/rxjs/5.5.5/Rx.min.js"></script>
+  <script>
+
+    const mainStream = Rx.Observable
+                            .interval(100)
+                            .take(10);
+
+    const firstStream = mainStream
+                            .map( (value)=> value * 10)
+                            .subscribe((value)=>console.log('First stream:' + value));
+    const secondStream = mainStream
+                            .filter( (value)=> value % 3 === 0)
+                            .subscribe( (value)=>console.log('Second stream:' + value));
+                            
+
+    
+  </script>
+</body>
+</html>
