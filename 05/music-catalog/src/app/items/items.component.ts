@@ -4,24 +4,27 @@ import { Item } from '../item';
 import { DataService }  from '../data.service';
 import { MessageService } from '../message.service';
 
+import { ActivatedRoute } from '@angular/router';
+
 @Component({
   selector: 'app-items',
   templateUrl: './items.component.html',
   styleUrls: ['./items.component.css']
 })
 export class ItemsComponent implements OnInit {
-  const CATEGORY = 'rock';  
   items:Item[]=[];
 
   constructor(
     private dataService:DataService,
-    private messageService:MessageService) { }
+    private messageService:MessageService,
+    private route:ActivatedRoute) { }
 
   ngOnInit() {
-    this.getItems(this.CATEGORY);
+    this.getItems();
   }
 
-  getItems(category:string):void{
+  getItems():void{
+    const category = this.route.snapshot.paramMap.get('category');
     this.dataService.getItems(category)
                     .subscribe(
                         (items)=>{

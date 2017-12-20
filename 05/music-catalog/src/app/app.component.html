@@ -1,6 +1,12 @@
-<h1>
-    Welcome to {{ title }}!
-</h1>
+<h1> Welcome to {{ title }}!</h1>
 
-<app-categories></app-categories>
+<ul class="nav nav-pills">
+  <li role="presentation"><a routerLink="/categories">Categories</a></li>
+  <li role="presentation"><a routerLink="/items">Best Sellers</a></li>
+<!--
+  <li role="presentation"><a href="#">Messages</a></li>
+-->
+</ul>
+<router-outlet></router-outlet>
+
 <app-message></app-message>  

@@ -8,6 +8,8 @@ import {ITEMS} from './items-data';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/do';
+import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/mergeMap';
 ;
 //import { of } from 'rxjs/observable/of';
 
@@ -24,5 +26,10 @@ export class DataService {
 
   getItems(category:string):Observable<Item[]>{
     return Observable.of(ITEMS[category]);
+  }
+
+  getBestSellers():Observable<Item[]>{
+ 
+    return Observable.of(ITEMS);
   }
 }

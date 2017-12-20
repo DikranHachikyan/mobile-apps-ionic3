@@ -1,0 +1,15 @@
+<button (click)="goBack()">Back</button>
+
+<div class="row" *ngFor="let item of bestSellers">
+  <div class="col-sm-12">
+    <div class="thumbnail">
+      <img src="/assets/{{item.artwork}}">
+      <div class="caption">
+        <h3>{{item.title}} <small>{{item.artist}}</small></h3>
+        <p>{{item.description}}</p>
+        <p>Price <span class="badge">{{item.price}}</span></p>
+        <p><a href="#" class="btn btn-primary" role="button">Button</a></p>
+      </div>
+    </div>
+  </div>
+</div>
