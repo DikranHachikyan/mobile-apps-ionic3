@@ -1,0 +1,7 @@
+<ul class="list-group">
+    <li class="list-group-item" *ngFor="let category of categories">
+        <h2>{{category.title}}</h2>
+        <img src="/assets/{{category.thumbnail}}" class="img-responsive img-thumbnail">
+        <p>{{category.description}}</p>
+    </li>
+</ul>
