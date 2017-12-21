@@ -1,0 +1,25 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Archive Tasks</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding>
+    <ion-list>
+        <ion-item-sliding #slidingItem *ngFor="let task of archivedTasks; index as idx">
+            <ion-item text-wrap>
+                {{task.title}}
+                <ion-note>
+                    {{task.status}}
+                </ion-note>
+            </ion-item>
+            <ion-item-options side="right">
+                <button ion-button
+                        (click)="restoreTask(idx, slidingItem)"
+                        >
+                    <ion-icon name="undo"></ion-icon>            
+                </button>
+            </ion-item-options>
+        </ion-item-sliding>
+    </ion-list>
+</ion-content>
